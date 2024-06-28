@@ -9,6 +9,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report
+# import openpyxl
 import pandas as pd
 import numpy as np
 
@@ -251,8 +252,10 @@ class CF(object):
         # Save the combined data to Excel
         df_combined.to_excel(sen.existing_file2, index=False)
         self.data_matrix = df_combined
-        dataset2['train'] = Dataset.from_pandas(self.data_matrix)
-        dataset2.push_to_hub("kolonam/system_recommendation_dataset")
+        Dataset.from_pandas(pd.DataFrame(data=self.data_matrix)).push_to_hub("kolonam/system_recommendation_dataset",
+                                                                    commit_message="test")
+        # dataset2['train'] = Dataset.from_pandas(self.data_matrix)
+        # dataset2.push_to_hub("kolonam/system_recommendation_dataset")
 
 def write_excel_to_excel(df, df2):
     for index, row in df.iterrows():
