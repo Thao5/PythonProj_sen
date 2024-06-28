@@ -17,7 +17,7 @@ import preprocess_kgptalkie as ps
 import re
 from flask_cors import CORS
 # import glob
-from PythonProj_sen.system_recomendation import CF
+from . import system_recomendation
 from datasets import load_dataset, Dataset
 from huggingface_hub import notebook_login
 from PythonProj_sen import app
@@ -307,7 +307,7 @@ class Sentiment(object):
 
 
 sentiment_object = Sentiment()
-rec = CF(k=4)
+rec = system_recomendation.CF(k=4)
 rec.normalize_matrix()
 rec.similarity()
 
