@@ -17,7 +17,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scipy import sparse
 from datasets import load_dataset, Dataset
 
-dataset2 = load_dataset("kolonam/system_recommendation_dataset", encoding = "ISO-8859-1", ignore_verifications=True )
+dataset2 = load_dataset("kolonam/system_recommendation_dataset", ignore_verifications=True )
 
 existing_file = "system_recommendation2.xlsx"
 df = pd.read_excel(existing_file)
