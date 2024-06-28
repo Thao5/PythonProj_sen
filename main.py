@@ -482,3 +482,5 @@ def excel_to_txt(df):
 
 # read_sentiment()
 
+if __name__=="__main__":
+    app.run(debug=False)
