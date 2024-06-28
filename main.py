@@ -483,4 +483,4 @@ def excel_to_txt(df):
 
 if __name__=="__main__":
     if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
-        app.run(debug=False, host='0.0.0.0')
+        app.run(debug=False, host='0.0.0.0', port=80)
