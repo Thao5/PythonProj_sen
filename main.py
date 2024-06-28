@@ -17,7 +17,7 @@ import preprocess_kgptalkie as ps
 import re
 from flask_cors import CORS
 # import glob
-from system_recomendation import CF
+from PythonProj_sen.system_recomendation import CF
 from datasets import load_dataset, Dataset
 from huggingface_hub import notebook_login
 from PythonProj_sen import app
