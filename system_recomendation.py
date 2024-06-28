@@ -19,9 +19,9 @@ from datasets import load_dataset, Dataset
 
 dataset2 = load_dataset("kolonam/system_recommendation_dataset", ignore_verifications=True )
 
-existing_file = "system_recommendation2.xlsx"
-df = pd.read_excel(existing_file)
-df_book2 = pd.read_excel("Book2.xlsx")
+# existing_file = "system_recommendation2.xlsx"
+# df = pd.read_excel(existing_file)
+# df_book2 = pd.read_excel("Book2.xlsx")
 
 print(pd.DataFrame(dataset2['train']))
 
@@ -224,7 +224,7 @@ class CF(object):
         #         item['similar'] = rating
         #         list_items.append(item.copy())
 
-        for index, row in df.iterrows():
+        for index, row in self.data_matrix.iterrows():
             i = row['item_id']
             if i not in items_rated_by_u:
                 rating = self.__pred(u, i)
@@ -275,7 +275,7 @@ def write_excel_to_excel(df, df2):
             df2 = df_combined
 
 
-test = CF(data_matrix=df, k=4)
+test = CF(k=4)
 test.normalize_matrix()
 test.similarity()
 # print(test.Y_data)
