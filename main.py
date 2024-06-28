@@ -7,13 +7,11 @@ import flask
 import pymysql
 import requests
 import underthesea
-from bs4 import BeautifulSoup
 from flask import Flask, render_template, request
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report, accuracy_score
-import openpyxl
 import pandas as pd
 import numpy as np
 import preprocess_kgptalkie as ps
@@ -30,10 +28,8 @@ from huggingface_hub import notebook_login
 notebook_login(write_permission=True)
 
 # Dataset.cleanup_cache_files
-dataset = load_dataset("kolonam/sentiment_quanan_dataset", encoding = "ISO-8859-1", ignore_verifications=True )
+dataset = load_dataset("kolonam/sentiment_quanan_dataset", encoding="ISO-8859-1", ignore_verifications=True)
 # dataset2 = load_dataset("kolonam/system_recommendation_dataset", encoding = "ISO-8859-1")
-
-
 
 
 app = Flask(__name__)
@@ -85,7 +81,7 @@ def get_clean(x):
 
 class Sentiment(object):
     def __init__(self):
-        self.SIZE_DEMO=5000
+        self.SIZE_DEMO = 5000
         self.count = 1
         self.existing_file = 'Book2.xlsx'
         self.existing_file2 = 'system_recommendation2.xlsx'
@@ -95,13 +91,15 @@ class Sentiment(object):
         # self.df_rec = pd.read_excel(self.existing_file2)
         self.df = self.df[:self.SIZE_DEMO]
         self.df['Review'] = self.df['Review'].apply(lambda x: get_clean(x))
-        self.tfidf = TfidfVectorizer(analyzer="word", tokenizer=underthesea.word_tokenize, token_pattern=None, lowercase=False)
+        self.tfidf = TfidfVectorizer(analyzer="word", tokenizer=underthesea.word_tokenize, token_pattern=None,
+                                     lowercase=False)
         self.X = self.tfidf.fit_transform(self.df['Review'])
         self.y = self.df['Sentiment']
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2,
                                                                                 random_state=0)
-        self.X_train, self.X_val, self.y_train, self.y_val = train_test_split(self.X_train, self.y_train, test_size=0.25,
-                                                                            random_state=0)
+        self.X_train, self.X_val, self.y_train, self.y_val = train_test_split(self.X_train, self.y_train,
+                                                                              test_size=0.25,
+                                                                              random_state=0)
         self.clf = LinearSVC().fit(self.X_train, self.y_train)
         self.y_pred = self.clf.predict(self.X_test)
 
@@ -169,7 +167,6 @@ class Sentiment(object):
         val_accuracy = accuracy_score(self.y_val, val_predictions)
         print(f"Validation Accuracy with Best Model: {val_accuracy:.4f}")
         print(classification_report(self.y_val, val_predictions))
-
 
     def select_comment(self):
         conn = get_conn()
@@ -268,7 +265,6 @@ class Sentiment(object):
         df_combined.to_excel(self.existing_file, index=False)
         self.df = df_combined
 
-
     def phan_loai_sentiment(self, noiDung, idThucAn, idNguoiDung, rec):
         x = noiDung
         print(x)
@@ -279,7 +275,8 @@ class Sentiment(object):
         tmp = str(self.clf.predict(vec)).strip('[]\'')
 
         # New data to append
-        new_data = {'Review': [x], 'Sentiment': [tmp], 'idThucAn': idThucAn, 'idNguoiDung': idNguoiDung, 'idComment': self.get_last_rec_comment()[0]['id']}
+        new_data = {'Review': [x], 'Sentiment': [tmp], 'idThucAn': idThucAn, 'idNguoiDung': idNguoiDung,
+                    'idComment': self.get_last_rec_comment()[0]['id']}
 
         df_new = pd.DataFrame(new_data)
 
@@ -291,7 +288,8 @@ class Sentiment(object):
         self.df = df_combined
         # dataset['train'] = Dataset.from_pandas(self.df)
         # dataset['train'].push_to_hub("kolonam/sentiment_quanan_dataset", commit_message="test")
-        Dataset.from_pandas(pd.DataFrame(data=self.df)).push_to_hub("kolonam/sentiment_quanan_dataset", commit_message="test")
+        Dataset.from_pandas(pd.DataFrame(data=self.df)).push_to_hub("kolonam/sentiment_quanan_dataset",
+                                                                    commit_message="test")
         if idNguoiDung > 0:
             rec.write_sentiment_to_rec(tmp, self, idThucAn, idNguoiDung)
         return tmp
@@ -310,7 +308,8 @@ class Sentiment(object):
                 if c not in list_comment:
                     list_comment.append(c)
 
-        s = {"rate": str((df2[df2.columns[0]].count() / df3[df3.columns[0]].count()) * 100), "list_comment": list_comment}
+        s = {"rate": str((df2[df2.columns[0]].count() / df3[df3.columns[0]].count()) * 100),
+             "list_comment": list_comment}
         return s
 
 
@@ -318,6 +317,7 @@ sentiment_object = Sentiment()
 rec = CF(k=4)
 rec.normalize_matrix()
 rec.similarity()
+
 
 # print(sentiment_object.tfidf.vocabulary_)
 
@@ -374,6 +374,7 @@ def get_rec():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 # files_content = []
 #
@@ -487,5 +488,9 @@ def read_sentiment():
             print(tmp)
             print(pos_tag(tmp))
 
+
 # read_sentiment()
 
+
+if __name__ == "__main__":
+    app.run(debug=False)
