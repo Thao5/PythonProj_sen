@@ -28,10 +28,10 @@ print(pd.DataFrame(dataset2['train']))
 
 def get_conn():
     conn = pymysql.connect(
-        host='kolonam.mysql.pythonanywhere-services.com',
-        user='kolonam',
-        password='thao123456',
-        db='kolonam$quanan',
+        host='sql12.freesqldatabase.com',
+        user='sql12716834',
+        password='zWPzCx5RUV',
+        db='sql12716834',
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor
     )

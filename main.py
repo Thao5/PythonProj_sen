@@ -1,6 +1,7 @@
 
 import decimal
 import json
+import os
 from datetime import datetime, date
 
 import pymysql
@@ -19,6 +20,7 @@ from flask_cors import CORS
 from system_recomendation import CF
 from datasets import load_dataset, Dataset
 from huggingface_hub import notebook_login
+from PythonProj_sen import app
 
 notebook_login(write_permission=True)
 
@@ -27,18 +29,15 @@ dataset = load_dataset("kolonam/sentiment_quanan_dataset", ignore_verifications=
 # dataset2 = load_dataset("kolonam/system_recommendation_dataset", encoding = "ISO-8859-1")
 
 
-
-
-app = Flask(__name__)
 CORS(app)
 
 
 def get_conn():
     conn = pymysql.connect(
-        host='kolonam.mysql.pythonanywhere-services.com',
-        user='kolonam',
-        password='thao123456',
-        db='kolonam$quanan',
+        host='sql12.freesqldatabase.com',
+        user='sql12716834',
+        password='zWPzCx5RUV',
+        db='sql12716834',
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor
     )
@@ -483,4 +482,5 @@ def excel_to_txt(df):
 # read_sentiment()
 
 if __name__=="__main__":
-    app.run(debug=False)
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        app.run(debug=False)

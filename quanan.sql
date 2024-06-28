@@ -21,16 +21,16 @@
 
 DROP TABLE IF EXISTS `ban`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `ban` (
   `id` int NOT NULL AUTO_INCREMENT,
   `mo_ta` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `id_chi_nhanh` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_chi_nhanh` (`id_chi_nhanh`),
   CONSTRAINT `ban_ibfk_1` FOREIGN KEY (`id_chi_nhanh`) REFERENCES `chi_nhanh` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,12 +49,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,17 +73,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `chi_nhanh`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `chi_nhanh` (
   `id` int NOT NULL AUTO_INCREMENT,
   `dia_chi` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `image` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `id_nguoi_dung` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_nguoi_dung` (`id_nguoi_dung`),
   CONSTRAINT `chi_nhanh_ibfk_1` FOREIGN KEY (`id_nguoi_dung`) REFERENCES `nguoi_dung` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,12 +102,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `danh_gia`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `danh_gia` (
   `id` int NOT NULL AUTO_INCREMENT,
   `noi_dung` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `danh_gia` int DEFAULT NULL,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `id_nguoi_dung` int DEFAULT NULL,
   `id_chi_nhanh` int DEFAULT NULL,
   `id_thuc_an` int DEFAULT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE `danh_gia` (
   CONSTRAINT `danh_gia_ibfk_1` FOREIGN KEY (`id_nguoi_dung`) REFERENCES `nguoi_dung` (`id`),
   CONSTRAINT `danh_gia_ibfk_2` FOREIGN KEY (`id_chi_nhanh`) REFERENCES `chi_nhanh` (`id`),
   CONSTRAINT `danh_gia_ibfk_3` FOREIGN KEY (`id_thuc_an`) REFERENCES `thuc_an` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,15 +137,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hoa_don`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `hoa_don` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `id_nguoi_dung` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_nguoi_dung` (`id_nguoi_dung`),
   CONSTRAINT `hoa_don_ibfk_1` FOREIGN KEY (`id_nguoi_dung`) REFERENCES `nguoi_dung` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,13 +164,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hoa_don_chi_tiet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `hoa_don_chi_tiet` (
   `id` int NOT NULL AUTO_INCREMENT,
   `so_luong_mua` int DEFAULT NULL,
   `gia_van_chuyen` decimal(10,0) DEFAULT NULL,
   `tong_tien` decimal(10,0) DEFAULT NULL,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `id_hoa_don` int DEFAULT NULL,
   `id_thuc_an` int DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -178,7 +178,7 @@ CREATE TABLE `hoa_don_chi_tiet` (
   KEY `id_thuc_an` (`id_thuc_an`),
   CONSTRAINT `hoa_don_chi_tiet_ibfk_1` FOREIGN KEY (`id_hoa_don`) REFERENCES `hoa_don` (`id`),
   CONSTRAINT `hoa_don_chi_tiet_ibfk_2` FOREIGN KEY (`id_thuc_an`) REFERENCES `thuc_an` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,12 +197,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hoa_don_chi_tiet_tai_cho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `hoa_don_chi_tiet_tai_cho` (
   `id` int NOT NULL AUTO_INCREMENT,
   `so_luong_mua` int DEFAULT NULL,
   `tong_tien` decimal(10,0) DEFAULT NULL,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `id_hoa_don` int DEFAULT NULL,
   `id_thuc_an` int DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -210,7 +210,7 @@ CREATE TABLE `hoa_don_chi_tiet_tai_cho` (
   KEY `id_thuc_an` (`id_thuc_an`),
   CONSTRAINT `hoa_don_chi_tiet_tai_cho_ibfk_1` FOREIGN KEY (`id_hoa_don`) REFERENCES `hoa_don_tai_cho` (`id`),
   CONSTRAINT `hoa_don_chi_tiet_tai_cho_ibfk_2` FOREIGN KEY (`id_thuc_an`) REFERENCES `thuc_an` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,15 +229,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hoa_don_tai_cho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `hoa_don_tai_cho` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `id_ban` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_ban` (`id_ban`),
   CONSTRAINT `hoa_don_tai_cho_ibfk_1` FOREIGN KEY (`id_ban`) REFERENCES `ban` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,7 +256,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `nguoi_dung`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `nguoi_dung` (
   `id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
@@ -270,7 +270,7 @@ CREATE TABLE `nguoi_dung` (
   `active` bit(1) DEFAULT NULL,
   `loai_nguoi_dung` varchar(45) DEFAULT 'NORMAL',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -289,7 +289,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `quy_dinh_van_chuyen`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `quy_dinh_van_chuyen` (
   `id` int NOT NULL AUTO_INCREMENT,
   `khoang_cach` double NOT NULL,
@@ -298,7 +298,7 @@ CREATE TABLE `quy_dinh_van_chuyen` (
   PRIMARY KEY (`id`),
   KEY `id_chi_nhanh` (`id_chi_nhanh`),
   CONSTRAINT `quy_dinh_van_chuyen_ibfk_1` FOREIGN KEY (`id_chi_nhanh`) REFERENCES `chi_nhanh` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,13 +316,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `thuc_an`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `thuc_an` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `so_luong` int DEFAULT NULL,
   `price` decimal(10,0) DEFAULT NULL,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `image` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `id_loai` int DEFAULT NULL,
   `id_chi_nhanh` int DEFAULT NULL,
@@ -332,7 +332,7 @@ CREATE TABLE `thuc_an` (
   KEY `id_chi_nhanh` (`id_chi_nhanh`),
   CONSTRAINT `thuc_an_ibfk_1` FOREIGN KEY (`id_loai`) REFERENCES `category` (`id`),
   CONSTRAINT `thuc_an_ibfk_2` FOREIGN KEY (`id_chi_nhanh`) REFERENCES `chi_nhanh` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
