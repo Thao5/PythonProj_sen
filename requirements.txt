@@ -99,7 +99,7 @@ thinc==8.2.3
 threadpoolctl==3.4.0
 tinysegmenter==0.3
 tldextract==5.1.2
-tqdm==4.66.2
+tqdm==4.66.3
 traitlets==5.14.3
 typer==0.9.4
 typing_extensions==4.10.0
