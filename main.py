@@ -20,7 +20,7 @@ from flask_cors import CORS
 from . import system_recomendation
 from datasets import load_dataset, Dataset
 from huggingface_hub import notebook_login
-from PythonProj_sen import app
+from . import app
 
 notebook_login(write_permission=True)
 
